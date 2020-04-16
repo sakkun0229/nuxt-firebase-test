@@ -3,6 +3,8 @@
     <h2>Firebase testing</h2>
     <p>{{ msg }}</p>
     <p>{{ list }}</p>
+    <p>{{ posts }}</p>
+    <button @click="onClick">Click!!</button>
   </div>
 </template>
 
@@ -13,16 +15,26 @@ export default {
   data() {
     return {
       msg: 'hello nuxt',
-      list: [],
+      posts: [],
     }
+  },
+  computed: {
+    list() {
+      return this.$store.state.list
+    },
   },
   async mounted() {
     this.msg = 'mouted!!'
     const snapshot = await db.collection('posts').get()
     snapshot.forEach(doc => {
       console.log(doc)
-      this.list.unshift(doc.data())
+      this.posts.unshift(doc.data())
     })
+  },
+  methods: {
+    onClick() {
+      console.log('clicked!!')
+    },
   },
 }
 </script>
