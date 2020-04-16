@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/firestore'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -11,4 +12,6 @@ if (!firebase.apps.length) {
     appId: '1:358644768924:web:7b9c8583b0fe0a98dccd59',
   })
 }
-export default firebase
+const db = firebase.firestore()
+
+export { firebase, db }
